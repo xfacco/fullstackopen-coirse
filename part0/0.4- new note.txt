@@ -1,1 +1,33 @@
+title 0.4: new note
 
+note over browser:
+User add text in note field.
+USer click the submit type button
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note over server:
+Add new date at note value:
+- content: req.body.note,
+- date: new Date()
+
+The procedure add form value to data.json
+on the end of the file
+end note
+
+server-->browser: HTML-code
+
+note over browser:
+Redirect the page to /new_note to  /notes
+- res.redirect(`${PATH_PREFIX}/notes`)
+end note
+
+
+browser->server: redirect to  HTTP POST https://studies.cs.helsinki.fi/exampleapp/notes
+
+server-->browser: HTML-code
+
+note over browser:
+Start /notes process page
+end note

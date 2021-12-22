@@ -1,0 +1,41 @@
+title 0.6: SPA New note  
+
+note over browser:
+User add text in note field.
+User click the submit type button
+- redrawNotes()
+- sendToServer(note)
+--- JS call in Ajax the page to add note
+end note
+
+
+note over browser:
+
+end note
+
+browser->+server: xhttpForPost.open("POST", '/exampleapp/new_note_spa', true)
+
+note over server:
+Add new date at note value:
+- content: req.body.note,
+- date: new Date()
+The procedure add form value to data.json
+on the end of the file
+end note
+
+note over browser:
+Browser is waiting a response to Ajax call 
+end note
+
+server-->-browser:  xhttpForPost.onreadystatechange = function () {
+
+note over browser:
+browser add new value to list with redrawNotes() function
+
+xhttp.onreadystatechange = function () {
+  if (this.readyState == 4 && this.status == 200) {
+    notes = JSON.parse(this.responseText)
+    redrawNotes()
+  }
+}
+end note

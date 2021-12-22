@@ -1,0 +1,65 @@
+title 0.5: SPA
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+
+note over browser:
+browser starts executing js-code
+that requests JSON data from server 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note
+
+
+note over browser:
+User add text in note field.
+User click the submit type button
+- redrawNotes()
+- sendToServer(note)
+--- JS call in Ajax the page to add note
+end note
+
+
+note over browser:
+
+end note
+
+browser->+server: xhttpForPost.open("POST", '/exampleapp/new_note_spa', true)
+
+note over server:
+Add new date at note value:
+- content: req.body.note,
+- date: new Date()
+The procedure add form value to data.json
+on the end of the file
+end note
+
+note over browser:
+Browser is waiting a response to Ajax call 
+end note
+
+server-->-browser:  xhttpForPost.onreadystatechange = function () {
+
+note over browser:
+browser add new value to list with redrawNotes() function
+
+xhttp.onreadystatechange = function () {
+  if (this.readyState == 4 && this.status == 200) {
+    notes = JSON.parse(this.responseText)
+    redrawNotes()
+  }
+}
+end note
+
+
+

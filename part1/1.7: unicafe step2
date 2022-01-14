@@ -17,9 +17,8 @@ const Title = (props) => {
     <h1>{props.text}</h1>
   )
 }
-const GetAvarage = (oldNumber, newNumber) => {
-    var decreaseValue = oldNumber - newNumber;
-    return (decreaseValue / oldNumber) * 100;
+const GetAvarage = (good, neutral, bad, countItems) => {
+    return ((good * 1) + (neutral * 0) + (bad * -1)) / countItems
 }
 const GetPercentageChange = (oldNumber, newNumber) => {
     var decreaseValue = oldNumber - newNumber;
@@ -54,7 +53,7 @@ const App = () => {
     var countItems = good + neutral + bad
     setAll(countItems)
     /* average ... (good: 1, neutral: 0, bad: -1) */
-    var valueAverage = ((good * 1) + (neutral * 0) + (bad * -1)) / countItems
+    var valueAverage = GetAvarage(good, neutral, bad, countItems)
     setAverage(valueAverage)
     var valuePositive = GetPercentageChange(countItems,(countItems-good))
     setPositive(valuePositive)
